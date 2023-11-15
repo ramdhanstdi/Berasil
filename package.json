@@ -15,5 +15,9 @@
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.2",
     "prisma": "^5.6.0"
+  },
+  "scripts": {
+    "dev" : "nodemon index.js",
+    "start" : "node index.js"
   }
 }
