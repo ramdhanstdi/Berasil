@@ -1,12 +1,18 @@
 // ENV
 require("dotenv").config();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
+
+// Prisma
+const prisma = require("./src/core/helpers/prisma");
 
 // Body Parser
 const bodyParser = require("body-parser");
 
 // Express
 const express = require("express");
+
+// JWT
+const jwt = require("jsonwebtoken");
 
 // CORS
 const cors = require("cors");
@@ -43,6 +49,46 @@ app.use("*", (req, res) => {
     message: "Path Not Found",
   });
 });
+
+/*app.post("/", verifyUser, (req, res) => {
+  return res.json({
+    message: "Post created",
+    data: req.body
+  });
+});
+
+app.post("/login", (req, res) => {
+  const user = {
+    id: 1,
+    username: "Sonia",
+    email: "soniaamalia@gmail.com"
+  }
+  jwt.sign(user, 'secret',{expiresIn: '30s'}, (err, token) => {
+    if (err){
+      console.log(err);
+      res.sendStatus(304);
+      return
+    }
+    const Token = token;
+    res.json({
+      user: user,
+      token: Token
+    });
+  });
+});
+
+function verifyUser(req, res, next){
+  const bearer = req.headers.bearer;
+  jwt.verify(bearer, 'secret', (err, data) =>{
+    if (err){
+      console.log(err.message);
+      res.json(err);
+      return
+    }
+    req.body = data
+    next()
+  })
+}*/
 
 // Listen
 app.listen(port, () => {
