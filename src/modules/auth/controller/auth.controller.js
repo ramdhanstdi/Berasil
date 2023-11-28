@@ -4,7 +4,7 @@ const errorResponse = require("../../../core/standardResponse/errorResponse");
 
 exports.registerUser = async (req, res) => {
   const results = await registerModel(req.body);
-  if (results.error) {
+  if (results?.error) {
     return errorResponse(results.error, res);
   }
   return successResponse(res, "Register Success", results.success);
