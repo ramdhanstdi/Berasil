@@ -1,5 +1,6 @@
 // ENV
 require("dotenv").config();
+const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET
 const port = process.env.PORT || 3000;
 
 // Prisma
@@ -16,6 +17,9 @@ const jwt = require("jsonwebtoken");
 
 // CORS
 const cors = require("cors");
+
+//Multer
+const multer = require('multer');
 
 // App
 const app = express();
@@ -49,46 +53,6 @@ app.use("*", (req, res) => {
     message: "Path Not Found",
   });
 });
-
-/*app.post("/", verifyUser, (req, res) => {
-  return res.json({
-    message: "Post created",
-    data: req.body
-  });
-});
-
-app.post("/login", (req, res) => {
-  const user = {
-    id: 1,
-    username: "Sonia",
-    email: "soniaamalia@gmail.com"
-  }
-  jwt.sign(user, 'secret',{expiresIn: '30s'}, (err, token) => {
-    if (err){
-      console.log(err);
-      res.sendStatus(304);
-      return
-    }
-    const Token = token;
-    res.json({
-      user: user,
-      token: Token
-    });
-  });
-});
-
-function verifyUser(req, res, next){
-  const bearer = req.headers.bearer;
-  jwt.verify(bearer, 'secret', (err, data) =>{
-    if (err){
-      console.log(err.message);
-      res.json(err);
-      return
-    }
-    req.body = data
-    next()
-  })
-}*/
 
 // Listen
 app.listen(port, () => {

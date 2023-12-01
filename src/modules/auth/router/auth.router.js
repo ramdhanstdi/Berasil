@@ -13,4 +13,13 @@ auth.post(
   authController.registerUser
 );
 
+//(24-11-2023)
+auth.post(
+  "/login",
+  //authValidation,
+  validationMiddleware,
+  authController.loginUser
+);
+//===
+
 module.exports = auth;
