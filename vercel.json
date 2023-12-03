@@ -1,14 +1,22 @@
-{ "version": 2, 
-"builds": [ 
-  { 
-    "src": "./index.js",
-    "use": "@vercel/node", 
-    "postbuild": "npx prisma generate"
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "./index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/"
+      }
+    ],
+    "functions": {
+      "postBuild": {
+        "runtime": "@vercel/node",
+        "handler": "npx prisma generate"
+      }
+    }
   }
-],
-"routes": [
-  { 
-    "src": "/(.*)",
-    "dest": "/" } 
-]
-}
+  
