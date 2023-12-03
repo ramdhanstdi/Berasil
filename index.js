@@ -1,10 +1,7 @@
 // ENV
 require("dotenv").config();
-const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET
+const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
 const port = process.env.PORT || 3000;
-
-// Prisma
-const prisma = require("./src/core/helpers/prisma");
 
 // Body Parser
 const bodyParser = require("body-parser");
@@ -17,9 +14,6 @@ const jwt = require("jsonwebtoken");
 
 // CORS
 const cors = require("cors");
-
-//Multer
-const multer = require('multer');
 
 // App
 const app = express();

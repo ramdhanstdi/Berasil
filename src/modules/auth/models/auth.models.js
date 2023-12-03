@@ -1,45 +1,44 @@
 const prisma = require("../../../core/helpers/prisma");
-const bcrypt = require("bcrypt");
 
 exports.registerModel = async (data) => {
   const results = {};
   try {
     const user = await prisma.user.create({
-      data,
+      data: {
+        email: data.email,
+        password: data.password,
+        username: data.username,
+        profile: { create: { first_name: data.username } },
+      },
+      select: { username: true },
     });
     results.success = user;
   } catch (error) {
     results.error = error;
-    console.log(error);
-    return results;
   }
+  return results;
 };
 
-exports.loginUserModel = async ({ email, password }) => {
+exports.loginUserModel = async ({ email }) => {
   const results = {};
+  let whereCondition;
+
+  if (email.includes("@")) {
+    whereCondition = { email };
+  } else {
+    whereCondition = { username: email };
+  }
+
   try {
-    const user = await prisma.user.findUnique({
-      where: { email },
+    const user = await prisma.user.findFirst({
+      where: whereCondition,
+      select: { id: true, password: true },
     });
-
-    if (!user) {
-      results.error = "User not found";
-      return results;
-    }
-
-    const passwordMatch = await bcrypt.compare(password, user.password);
-
-    if (!passwordMatch) {
-      results.error = "Invalid password";
-      return results;
-    }
 
     results.success = user;
   } catch (error) {
     results.error = error;
-    console.log(error);
   }
 
   return results;
 };
-
