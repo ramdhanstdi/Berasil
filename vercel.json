@@ -11,12 +11,6 @@
         "src": "/(.*)",
         "dest": "/"
       }
-    ],
-    "functions": {
-      "postBuild": {
-        "runtime": "@vercel/node",
-        "handler": "npx prisma generate"
-      }
-    }
+    ]
   }
   
