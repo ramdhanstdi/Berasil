@@ -41,7 +41,12 @@ exports.loginUser = async (req, res) => {
           process.env.APP_KEY || "BERASIL",
           { expiresIn: "360d" }
         );
-        return successResponse(res, "Login Success", { token });
+        return successResponse(res, "Login Success", {
+          token,
+          userId: user.id,
+          name: user.profile.first_name,
+          email: user.email,
+        });
       }
       return successResponse(res, "Wrong Email or Password", null, null, 400);
     })
