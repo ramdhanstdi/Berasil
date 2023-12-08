@@ -14,6 +14,7 @@ exports.registerModel = async (data) => {
     });
     results.success = user;
   } catch (error) {
+    console.log(error);
     results.error = error;
   }
   return results;
@@ -32,7 +33,12 @@ exports.loginUserModel = async ({ email }) => {
   try {
     const user = await prisma.user.findFirst({
       where: whereCondition,
-      select: { id: true, password: true },
+      select: {
+        id: true,
+        password: true,
+        email: true,
+        profile: { select: { first_name: true } },
+      },
     });
 
     results.success = user;

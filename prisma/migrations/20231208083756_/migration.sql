@@ -1,18 +1,10 @@
-/*
-  Warnings:
-
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "User";
-
 -- CreateTable
 CREATE TABLE "user" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "created_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "email" VARCHAR NOT NULL,
     "password" VARCHAR NOT NULL,
+    "username" VARCHAR NOT NULL,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
@@ -44,7 +36,7 @@ CREATE TABLE "profile" (
     "edited_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
     "user_id" UUID NOT NULL,
     "first_name" VARCHAR NOT NULL,
-    "last_name" VARCHAR NOT NULL,
+    "last_name" VARCHAR,
     "use_as" VARCHAR,
 
     CONSTRAINT "profile_pkey" PRIMARY KEY ("id")
