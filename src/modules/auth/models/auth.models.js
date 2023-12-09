@@ -14,6 +14,7 @@ exports.registerModel = async (data) => {
     });
     results.success = user;
   } catch (error) {
+    console.log(error);
     results.error = error;
   }
   return results;
