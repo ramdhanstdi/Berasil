@@ -41,10 +41,10 @@ exports.loginUser = async (req, res) => {
           { expiresIn: "360d" }
         );
         return successResponse(res, "Login Success", {
+          token,
           userId: user.id,
           name: user.profile.first_name,
           email: user.email,
-          token,
         });
       }
       return successResponse(res, "Invalid password", null, null, 400);
