@@ -16,17 +16,16 @@ exports.registerUser = async (req, res) => {
   if (results?.error) {
     return errorResponse(results.error, res);
   }
-  return successResponse(res, "Register Success", results?.success);
+  return successResponse(res, "Registration Success", null);
 };
 
-// (28-11-2023)
 exports.loginUser = async (req, res) => {
   const results = await loginUserModel(req.body);
   if (results?.error) {
     return errorResponse(results.error, res);
   }
   if (results.success === null) {
-    return successResponse(res, "Wrong Email or Password", null, null, 400);
+    return successResponse(res, "User not found", null, null, 400);
   }
 
   const user = results?.success;
@@ -48,10 +47,9 @@ exports.loginUser = async (req, res) => {
           email: user.email,
         });
       }
-      return successResponse(res, "Wrong Email or Password", null, null, 400);
+      return successResponse(res, "Invalid password", null, null, 400);
     })
     .catch((e) => {
-      return successResponse(res, "Wrong Email or Password", null, null, 400);
+      return successResponse(res, "Invalid password", null, null, 400);
     });
 };
-//====
