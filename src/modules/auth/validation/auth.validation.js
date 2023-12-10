@@ -5,6 +5,7 @@ const { body } = require("express-validator");
 const bcrypt = require("bcrypt");
 
 const authValidation = [
+  body("name").notEmpty().withMessage("Name must be filled").escape(),
   body("email").notEmpty().isEmail().withMessage("Wrong Email Format").escape(),
   body("password")
     .notEmpty()
@@ -16,7 +17,6 @@ const authValidation = [
       const hash = await bcrypt.hash(val, 10);
       return hash;
     }),
-
 ];
 
 module.exports = authValidation;

@@ -16,7 +16,9 @@ exports.registerUser = async (req, res) => {
   if (results?.error) {
     return errorResponse(results.error, res);
   }
-  return successResponse(res, "Registration Success", null);
+  return successResponse(res, "Registration Success", {
+    name: results.success.username,
+  });
 };
 
 exports.loginUser = async (req, res) => {

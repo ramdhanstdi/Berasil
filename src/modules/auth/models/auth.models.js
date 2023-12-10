@@ -7,8 +7,8 @@ exports.registerModel = async (data) => {
       data: {
         email: data.email,
         password: data.password,
-        username: data.username,
-        profile: { create: { first_name: data.username } },
+        username: data.name,
+        profile: { create: { first_name: data.name } },
       },
       select: { username: true },
     });
